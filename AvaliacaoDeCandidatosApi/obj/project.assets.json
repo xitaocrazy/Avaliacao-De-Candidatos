@@ -12539,11 +12539,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\daniel.martins\\Documents\\GitHub\\AvaliacaoDeCandidatosApi\\AvaliacaoDeCandidatosApi.csproj",
+      "projectUniqueName": "C:\\Users\\daniel.martins\\Documents\\GitHub\\Avaliacao-De-Candidatos\\AvaliacaoDeCandidatosApi\\AvaliacaoDeCandidatosApi.csproj",
       "projectName": "AvaliacaoDeCandidatosApi",
-      "projectPath": "c:\\Users\\daniel.martins\\Documents\\GitHub\\AvaliacaoDeCandidatosApi\\AvaliacaoDeCandidatosApi.csproj",
+      "projectPath": "C:\\Users\\daniel.martins\\Documents\\GitHub\\Avaliacao-De-Candidatos\\AvaliacaoDeCandidatosApi\\AvaliacaoDeCandidatosApi.csproj",
       "packagesPath": "C:\\Users\\daniel.martins\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\daniel.martins\\Documents\\GitHub\\AvaliacaoDeCandidatosApi\\obj\\",
+      "outputPath": "C:\\Users\\daniel.martins\\Documents\\GitHub\\Avaliacao-De-Candidatos\\AvaliacaoDeCandidatosApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

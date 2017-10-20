@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using AvaliacaoDeCandidatosApi.Enuns;
+
 namespace AvaliacaoDeCandidatosApi.Models {
     public interface ICandidato {
         string Nome {get; set;} 
@@ -9,5 +12,6 @@ namespace AvaliacaoDeCandidatosApi.Models {
         int Django {get; set;}
         int Ios {get; set;}
         int Android {get; set;}
+        List<Qualificacao> Qualificacoes {get; set;}
     }
 }
