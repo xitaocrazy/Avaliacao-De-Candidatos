@@ -1,0 +1,10 @@
+c:\Users\daniel.martins\Documents\GitHub\AvaliacaoDeCandidatosApi\bin\Debug\netcoreapp2.0\AvaliacaoDeCandidatosApi.deps.json
+c:\Users\daniel.martins\Documents\GitHub\AvaliacaoDeCandidatosApi\bin\Debug\netcoreapp2.0\AvaliacaoDeCandidatosApi.runtimeconfig.json
+c:\Users\daniel.martins\Documents\GitHub\AvaliacaoDeCandidatosApi\bin\Debug\netcoreapp2.0\AvaliacaoDeCandidatosApi.runtimeconfig.dev.json
+c:\Users\daniel.martins\Documents\GitHub\AvaliacaoDeCandidatosApi\bin\Debug\netcoreapp2.0\AvaliacaoDeCandidatosApi.dll
+c:\Users\daniel.martins\Documents\GitHub\AvaliacaoDeCandidatosApi\bin\Debug\netcoreapp2.0\AvaliacaoDeCandidatosApi.pdb
+c:\Users\daniel.martins\Documents\GitHub\AvaliacaoDeCandidatosApi\obj\Debug\netcoreapp2.0\AvaliacaoDeCandidatosApi.csproj.CoreCompileInputs.cache
+c:\Users\daniel.martins\Documents\GitHub\AvaliacaoDeCandidatosApi\obj\Debug\netcoreapp2.0\AvaliacaoDeCandidatosApi.AssemblyInfoInputs.cache
+c:\Users\daniel.martins\Documents\GitHub\AvaliacaoDeCandidatosApi\obj\Debug\netcoreapp2.0\AvaliacaoDeCandidatosApi.AssemblyInfo.cs
+c:\Users\daniel.martins\Documents\GitHub\AvaliacaoDeCandidatosApi\obj\Debug\netcoreapp2.0\AvaliacaoDeCandidatosApi.dll
+c:\Users\daniel.martins\Documents\GitHub\AvaliacaoDeCandidatosApi\obj\Debug\netcoreapp2.0\AvaliacaoDeCandidatosApi.pdb
