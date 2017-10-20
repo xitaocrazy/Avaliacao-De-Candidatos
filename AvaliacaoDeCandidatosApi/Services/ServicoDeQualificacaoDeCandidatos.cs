@@ -22,7 +22,7 @@ namespace AvaliacaoDeCandidatosApi.Services {
 
         private void VerifiqueSeCandidatoEhQualificadoParaMobile(ICandidato candidato){
             if (candidato.Ios >= 7 || candidato.Android >= 7){
-                candidato.Qualificacoes.Add(Qualificacao.backEnd);
+                candidato.Qualificacoes.Add(Qualificacao.mobile);
             }
         }
 

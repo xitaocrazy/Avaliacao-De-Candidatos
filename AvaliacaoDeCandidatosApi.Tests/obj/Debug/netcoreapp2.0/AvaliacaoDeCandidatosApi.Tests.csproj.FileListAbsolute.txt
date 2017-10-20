@@ -1,0 +1,15 @@
+C:\Users\daniel.martins\Documents\GitHub\Avaliacao-De-Candidatos\AvaliacaoDeCandidatosApi.Tests\bin\Debug\netcoreapp2.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+C:\Users\daniel.martins\Documents\GitHub\Avaliacao-De-Candidatos\AvaliacaoDeCandidatosApi.Tests\bin\Debug\netcoreapp2.0\xunit.runner.utility.netstandard15.dll
+C:\Users\daniel.martins\Documents\GitHub\Avaliacao-De-Candidatos\AvaliacaoDeCandidatosApi.Tests\bin\Debug\netcoreapp2.0\xunit.runner.reporters.netstandard15.dll
+C:\Users\daniel.martins\Documents\GitHub\Avaliacao-De-Candidatos\AvaliacaoDeCandidatosApi.Tests\bin\Debug\netcoreapp2.0\AvaliacaoDeCandidatosApi.Tests.deps.json
+C:\Users\daniel.martins\Documents\GitHub\Avaliacao-De-Candidatos\AvaliacaoDeCandidatosApi.Tests\bin\Debug\netcoreapp2.0\AvaliacaoDeCandidatosApi.Tests.runtimeconfig.json
+C:\Users\daniel.martins\Documents\GitHub\Avaliacao-De-Candidatos\AvaliacaoDeCandidatosApi.Tests\bin\Debug\netcoreapp2.0\AvaliacaoDeCandidatosApi.Tests.runtimeconfig.dev.json
+C:\Users\daniel.martins\Documents\GitHub\Avaliacao-De-Candidatos\AvaliacaoDeCandidatosApi.Tests\bin\Debug\netcoreapp2.0\AvaliacaoDeCandidatosApi.Tests.dll
+C:\Users\daniel.martins\Documents\GitHub\Avaliacao-De-Candidatos\AvaliacaoDeCandidatosApi.Tests\bin\Debug\netcoreapp2.0\AvaliacaoDeCandidatosApi.Tests.pdb
+C:\Users\daniel.martins\Documents\GitHub\Avaliacao-De-Candidatos\AvaliacaoDeCandidatosApi.Tests\bin\Debug\netcoreapp2.0\AvaliacaoDeCandidatosApi.dll
+C:\Users\daniel.martins\Documents\GitHub\Avaliacao-De-Candidatos\AvaliacaoDeCandidatosApi.Tests\bin\Debug\netcoreapp2.0\AvaliacaoDeCandidatosApi.pdb
+C:\Users\daniel.martins\Documents\GitHub\Avaliacao-De-Candidatos\AvaliacaoDeCandidatosApi.Tests\obj\Debug\netcoreapp2.0\AvaliacaoDeCandidatosApi.Tests.csproj.CoreCompileInputs.cache
+C:\Users\daniel.martins\Documents\GitHub\Avaliacao-De-Candidatos\AvaliacaoDeCandidatosApi.Tests\obj\Debug\netcoreapp2.0\AvaliacaoDeCandidatosApi.Tests.AssemblyInfoInputs.cache
+C:\Users\daniel.martins\Documents\GitHub\Avaliacao-De-Candidatos\AvaliacaoDeCandidatosApi.Tests\obj\Debug\netcoreapp2.0\AvaliacaoDeCandidatosApi.Tests.AssemblyInfo.cs
+C:\Users\daniel.martins\Documents\GitHub\Avaliacao-De-Candidatos\AvaliacaoDeCandidatosApi.Tests\obj\Debug\netcoreapp2.0\AvaliacaoDeCandidatosApi.Tests.dll
+C:\Users\daniel.martins\Documents\GitHub\Avaliacao-De-Candidatos\AvaliacaoDeCandidatosApi.Tests\obj\Debug\netcoreapp2.0\AvaliacaoDeCandidatosApi.Tests.pdb
