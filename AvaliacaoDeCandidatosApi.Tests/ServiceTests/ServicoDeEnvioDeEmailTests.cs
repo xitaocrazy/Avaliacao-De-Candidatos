@@ -7,6 +7,7 @@ using AvaliacaoDeCandidatosApi.Wrappers;
 using MimeKit;
 using System.Threading.Tasks;
 using AvaliacaoDeCandidatosApi.Exceptions;
+using System.Collections.Generic;
 
 namespace AvaliacaoDeCandidatosApi.Tests.ServiceTests {
     public class ServicoDeEnvioDeEmailTests{
@@ -136,6 +137,172 @@ namespace AvaliacaoDeCandidatosApi.Tests.ServiceTests {
              var ex = Assert.ThrowsAsync<EnvioDeEmailException>(() => servicoDeEnvioDeEmail.EnvieEmailAsync(configuracaoSmtp, email, _smtpMock.Object));
 
              Assert.Equal("Erro ao enviar o e-mail.", ex.Result.Message);
+         }
+
+         [Fact]
+         public async void EnvieEmailsAsyncTest_deve_chamar_ConnectAsync(){
+             ConfigureSmtpMock();
+             var emails = new List<IEmail>{
+                 GetEmail(),
+                 GetEmail(),
+                 GetEmail()
+             };
+             var configuracaoSmtp = GetConfiguracaoSmtp();
+             var servicoDeEnvioDeEmail = new ServicoDeEnvioDeEmail();
+             
+             await servicoDeEnvioDeEmail.EnvieEmailsAsync(configuracaoSmtp, emails, _smtpMock.Object);
+
+             _smtpMock.Verify(s => s.ConnectAsync(It.IsAny<string>(), It.IsAny<int>(), It.IsAny<bool>()), Times.Once);
+         }
+
+         [Fact]
+         public async void EnvieEmailsAsyncTest_nao_deve_chamar_AuthenticateAsync_quando_nao_requer_autenticacao(){
+             ConfigureSmtpMock();
+             var emails = new List<IEmail>{
+                 GetEmail(),
+                 GetEmail(),
+                 GetEmail()
+             };
+             var configuracaoSmtp = GetConfiguracaoSmtp();
+             var servicoDeEnvioDeEmail = new ServicoDeEnvioDeEmail();
+             
+             await servicoDeEnvioDeEmail.EnvieEmailsAsync(configuracaoSmtp, emails, _smtpMock.Object);
+
+             _smtpMock.Verify(s => s.AuthenticateAsync(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
+         }
+
+         [Fact]
+         public async void EnvieEmailsAsyncTest_deve_chamar_AuthenticateAsync_quando_requer_autenticacao(){
+             ConfigureSmtpMock();
+             var emails = new List<IEmail>{
+                 GetEmail(),
+                 GetEmail(),
+                 GetEmail()
+             };
+             var configuracaoSmtp = GetConfiguracaoSmtp();
+             configuracaoSmtp.RequerAutenticacao = true;
+             var servicoDeEnvioDeEmail = new ServicoDeEnvioDeEmail();
+             
+             await servicoDeEnvioDeEmail.EnvieEmailsAsync(configuracaoSmtp, emails, _smtpMock.Object);
+
+             _smtpMock.Verify(s => s.AuthenticateAsync(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
+         }
+
+         [Fact]
+         public async void EnvieEmailsAsyncTest_deve_chamar_SendAsync(){
+             ConfigureSmtpMock();
+             var emails = new List<IEmail>{
+                 GetEmail(),
+                 GetEmail(),
+                 GetEmail()
+             };
+             var configuracaoSmtp = GetConfiguracaoSmtp();
+             var servicoDeEnvioDeEmail = new ServicoDeEnvioDeEmail();
+             
+             await servicoDeEnvioDeEmail.EnvieEmailsAsync(configuracaoSmtp, emails, _smtpMock.Object);
+
+             _smtpMock.Verify(s => s.SendAsync(It.IsAny<MimeMessage>()), Times.Exactly(3));
+         }
+
+         [Fact]
+         public async void EnvieEmailsAsyncTest_deve_chamar_DisconnectAsync(){
+             ConfigureSmtpMock();
+             var emails = new List<IEmail>{
+                 GetEmail(),
+                 GetEmail(),
+                 GetEmail()
+             };
+             var configuracaoSmtp = GetConfiguracaoSmtp();
+             var servicoDeEnvioDeEmail = new ServicoDeEnvioDeEmail();
+             
+             await servicoDeEnvioDeEmail.EnvieEmailsAsync(configuracaoSmtp, emails, _smtpMock.Object);
+
+             _smtpMock.Verify(s => s.DisconnectAsync(It.IsAny<bool>()), Times.Once);
+         }
+
+         [Fact]
+         public void EnvieEmailsAsyncTest_deve_retornar_excecao_quando_email_de_origem_nao_informado(){
+             ConfigureSmtpMock();
+             var emails = new List<IEmail>{
+                 GetEmail(),
+                 GetEmail(),
+                 GetEmail()
+             };
+             emails[1].Origem = string.Empty;
+             var configuracaoSmtp = GetConfiguracaoSmtp();             
+             var servicoDeEnvioDeEmail = new ServicoDeEnvioDeEmail();
+
+             var ex = Assert.ThrowsAsync<ArgumentException>(() => servicoDeEnvioDeEmail.EnvieEmailsAsync(configuracaoSmtp, emails, _smtpMock.Object));
+
+             Assert.Equal("E-mail de origem não informado.", ex.Result.Message);
+         }
+
+         [Fact]
+         public void EnvieEmailsAsyncTest_deve_retornar_excecao_quando_email_de_destino_nao_informado(){
+             ConfigureSmtpMock();
+             var emails = new List<IEmail>{
+                 GetEmail(),
+                 GetEmail(),
+                 GetEmail()
+             };
+             emails[1].Destino = string.Empty;
+             var configuracaoSmtp = GetConfiguracaoSmtp();             
+             var servicoDeEnvioDeEmail = new ServicoDeEnvioDeEmail();
+
+             var ex = Assert.ThrowsAsync<ArgumentException>(() => servicoDeEnvioDeEmail.EnvieEmailsAsync(configuracaoSmtp, emails, _smtpMock.Object));
+
+             Assert.Equal("E-mail de destino não informado.", ex.Result.Message);
+         }
+
+         [Fact]
+         public void EnvieEmailsAsyncTest_deve_retornar_excecao_quando_assunto_nao_informado(){
+             ConfigureSmtpMock();
+             var emails = new List<IEmail>{
+                 GetEmail(),
+                 GetEmail(),
+                 GetEmail()
+             };
+             emails[0].Assunto = string.Empty;
+             var configuracaoSmtp = GetConfiguracaoSmtp();             
+             var servicoDeEnvioDeEmail = new ServicoDeEnvioDeEmail();
+
+             var ex = Assert.ThrowsAsync<ArgumentException>(() => servicoDeEnvioDeEmail.EnvieEmailsAsync(configuracaoSmtp, emails, _smtpMock.Object));
+
+             Assert.Equal("Assunto não informado.", ex.Result.Message);
+         }
+
+         [Fact]
+         public void EnvieEmailsAsyncTest_deve_retornar_excecao_quando_nenhum_conteudo_for_informado(){
+             ConfigureSmtpMock();
+             var emails = new List<IEmail>{
+                 GetEmail(),
+                 GetEmail(),
+                 GetEmail()
+             };
+             emails[0].MensagemDeTexto = string.Empty;
+             emails[0].MensagemHtml = string.Empty;
+             var configuracaoSmtp = GetConfiguracaoSmtp();             
+             var servicoDeEnvioDeEmail = new ServicoDeEnvioDeEmail();
+
+             var ex = Assert.ThrowsAsync<ArgumentException>(() => servicoDeEnvioDeEmail.EnvieEmailsAsync(configuracaoSmtp, emails, _smtpMock.Object));
+
+             Assert.Equal("Nenhuma mensagem foi informada.", ex.Result.Message);
+         }
+
+         [Fact]
+         public void EnvieEmailsAsyncTest_deve_retornar_excecao_quando_ocorrer_algum_erro_no_envio_do_email(){
+             ConfigureSmtpMockComErro();
+             var emails = new List<IEmail>{
+                 GetEmail(),
+                 GetEmail(),
+                 GetEmail()
+             };
+             var configuracaoSmtp = GetConfiguracaoSmtp();             
+             var servicoDeEnvioDeEmail = new ServicoDeEnvioDeEmail();
+
+             var ex = Assert.ThrowsAsync<EnvioDeEmailException>(() => servicoDeEnvioDeEmail.EnvieEmailsAsync(configuracaoSmtp, emails, _smtpMock.Object));
+
+             Assert.Equal("Erro ao enviar os e-mails.", ex.Result.Message);
          }
 
          private void ConfigureSmtpMock(){
