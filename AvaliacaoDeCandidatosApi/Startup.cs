@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AvaliacaoDeCandidatosApi.Models;
+using AvaliacaoDeCandidatosApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -19,6 +20,7 @@ namespace AvaliacaoDeCandidatosApi {
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services) {
+            services.AddTransient<IServicoDeEnvioDeEmail, ServicoDeEnvioDeEmail>();
             services.AddSingleton<IConfiguration>(c => Configuration);
             services.Configure<ConfiguracaoSmtp>(Configuration.GetSection("ConfiguracaoSmtp"));
             services.AddMvc();

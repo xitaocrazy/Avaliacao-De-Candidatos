@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AvaliacaoDeCandidatosApi.Models;
+using AvaliacaoDeCandidatosApi.Services;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Configuration;
 
@@ -11,14 +12,25 @@ namespace AvaliacaoDeCandidatosApi.Controllers {
     [Route("api/[controller]")]
     public class CandidatosController : Controller {
         private IConfiguracaoSmtp _configuracaoSmtp;
+        private IServicoDeEnvioDeEmail _servicoDeEnvioDeEmail;
 
-        public CandidatosController(IOptions<ConfiguracaoSmtp> configuracaoSmtp){
+        public CandidatosController(IOptions<ConfiguracaoSmtp> configuracaoSmtp, IServicoDeEnvioDeEmail servicoDeEnvioDeEmail){
             _configuracaoSmtp = configuracaoSmtp.Value;
+            _servicoDeEnvioDeEmail = servicoDeEnvioDeEmail;
         }
 
         // GET api/candidatos
         [HttpGet]
         public IEnumerable<dynamic> Get() {
+            var email = new Email{
+                Destino = "xitaocrazy@gmail.com",
+                Origem = "danieldesouzamartins@gmail.com",
+                Assunto = "teste de envio",
+                MensagemDeTexto = "Isto é um teste",
+                MensagemHtml = string.Empty,
+                EncaminharPara = string.Empty
+            };
+            _servicoDeEnvioDeEmail.EnvieEmailAsync(_configuracaoSmtp, email);
             return new [] { _configuracaoSmtp };
         }
 

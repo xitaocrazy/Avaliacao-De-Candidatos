@@ -3,7 +3,7 @@ using AvaliacaoDeCandidatosApi.Models;
 using Microsoft.Extensions.Options;
 
 namespace AvaliacaoDeCandidatosApi.Services {
-    public interface IServicoDeEnviodeEmails {
-        Task EnvieEmailAsync(IOptions<ConfiguracaoSmtp> configuracaoSmtp, IEmail email);
+    public interface IServicoDeEnvioDeEmail {
+        Task EnvieEmailAsync(IConfiguracaoSmtp configuracaoSmtp, IEmail email);
     }
 }
