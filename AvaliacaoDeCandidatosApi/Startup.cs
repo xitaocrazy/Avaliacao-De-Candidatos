@@ -21,6 +21,7 @@ namespace AvaliacaoDeCandidatosApi {
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services) {
+            services.AddTransient<IServicoDeQualificacaoDeCandidatos, ServicoDeQualificacaoDeCandidatos>();
             services.AddTransient<IServicoDeEnvioDeEmail, ServicoDeEnvioDeEmail>();
             services.AddTransient<ISmtpClient, SmtpClientWrapper>();
             services.AddSingleton<IConfiguration>(c => Configuration);

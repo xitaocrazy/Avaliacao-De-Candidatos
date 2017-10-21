@@ -16,10 +16,14 @@ namespace AvaliacaoDeCandidatosApi.Controllers {
         private IServicoDeEnvioDeEmail _servicoDeEnvioDeEmail;
         private ISmtpClient _smtpClient;
 
-        public CandidatosController(IOptions<ConfiguracaoSmtp> configuracaoSmtp, IServicoDeEnvioDeEmail servicoDeEnvioDeEmail, ISmtpClient smtpClient){
+        private IServicoDeQualificacaoDeCandidatos _servicoDeQualificacaoDeCandidatos;
+
+        public CandidatosController(IOptions<ConfiguracaoSmtp> configuracaoSmtp, IServicoDeEnvioDeEmail servicoDeEnvioDeEmail, 
+                                    ISmtpClient smtpClient, IServicoDeQualificacaoDeCandidatos servicoDeQualificacaoDeCandidatos){
             _configuracaoSmtp = configuracaoSmtp.Value;
             _servicoDeEnvioDeEmail = servicoDeEnvioDeEmail;
             _smtpClient = smtpClient;
+            _servicoDeQualificacaoDeCandidatos = servicoDeQualificacaoDeCandidatos;
         }
 
         // GET api/candidatos
@@ -33,8 +37,21 @@ namespace AvaliacaoDeCandidatosApi.Controllers {
                 MensagemHtml = string.Empty,
                 EncaminharPara = string.Empty
             };
-            _servicoDeEnvioDeEmail.EnvieEmailAsync(_configuracaoSmtp, email, _smtpClient);
-            return new [] { _configuracaoSmtp };
+            var candidato = new Candidato{
+                Nome = "CandidatoTeste1",
+                Email = "candidato@teste1.com",
+                HTML = 8,
+                CSS = 8,
+                Javascript = 8,
+                Python = 8,
+                Django = 8,
+                Ios = 2,
+                Android = 8                
+            };
+            //_servicoDeEnvioDeEmail.EnvieEmailAsync(_configuracaoSmtp, email, _smtpClient);
+            _servicoDeQualificacaoDeCandidatos.QualifiqueCandidato(candidato);
+            var retorno = _servicoDeQualificacaoDeCandidatos.GetEmailDeRetorno(candidato, "origem@gail.com");
+            return retorno;
         }
 
         // GET api/candidatos/5
