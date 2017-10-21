@@ -1,6 +1,8 @@
 using System;
 using System.Threading.Tasks;
+using AvaliacaoDeCandidatosApi.Exceptions;
 using AvaliacaoDeCandidatosApi.Models;
+using AvaliacaoDeCandidatosApi.Wrappers;
 using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
 using MimeKit;
@@ -10,10 +12,12 @@ namespace AvaliacaoDeCandidatosApi.Services {
         private IConfiguracaoSmtp _configuracaoSmtp;
         private IEmail _email;
         private MimeMessage _mail; 
+        private ISmtpClient _smtpClient;
 
-        public async Task EnvieEmailAsync(IConfiguracaoSmtp configuracaoSmtp, IEmail email){
+        public async Task EnvieEmailAsync(IConfiguracaoSmtp configuracaoSmtp, IEmail email, ISmtpClient smtpClient){
             _configuracaoSmtp = configuracaoSmtp;
             _email = email;
+            _smtpClient = smtpClient;
 
             SetParametrosDoemail();
             ConstruaCorpoDoEmail();
@@ -33,7 +37,7 @@ namespace AvaliacaoDeCandidatosApi.Services {
         }
 
         private void VerifiqueSeOsParametrosObrigatoriosForamInformados() {
-            if (string.IsNullOrWhiteSpace(_email.Origem)) {
+            if (string.IsNullOrWhiteSpace(_email.Destino)) {
                 throw new ArgumentException("E-mail de destino não informado.");
             }
 
@@ -73,14 +77,16 @@ namespace AvaliacaoDeCandidatosApi.Services {
         }
 
         private async Task EnvieEmailAsync(){
-            using (var client = new SmtpClient()) {
-                await client.ConnectAsync(_configuracaoSmtp.Servidor, _configuracaoSmtp.Porta, _configuracaoSmtp.UseSsl).ConfigureAwait(false);
-                client.AuthenticationMechanisms.Remove("XOAUTH2");
+            try{
+                await _smtpClient.ConnectAsync(_configuracaoSmtp.Servidor, _configuracaoSmtp.Porta, _configuracaoSmtp.UseSsl).ConfigureAwait(false);
                 if(_configuracaoSmtp.RequerAutenticacao) {
-                    await client.AuthenticateAsync(_configuracaoSmtp.Usuario, _configuracaoSmtp.Senha).ConfigureAwait(false);
+                    await _smtpClient.AuthenticateAsync(_configuracaoSmtp.Usuario, _configuracaoSmtp.Senha).ConfigureAwait(false);
                 }               
-                await client.SendAsync(_mail).ConfigureAwait(false);
-                await client.DisconnectAsync(true).ConfigureAwait(false);
+                await _smtpClient.SendAsync(_mail).ConfigureAwait(false);
+                await _smtpClient.DisconnectAsync(true).ConfigureAwait(false);
+            }
+            catch (Exception ex){
+                throw new EnvioDeEmailException("Erro ao enviar o e-mail.", ex.InnerException);
             }
         }
     }

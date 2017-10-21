@@ -9,7 +9,7 @@ namespace AvaliacaoDeCandidatosApi.Tests.ModelTests {
         private ConfiguracaoSmtp _configuracao3;
 
         [Fact]
-        public void ToString_de_retornar_o_valor_esperado() {
+        public void ToStringTest_de_retornar_o_valor_esperado() {
             CreateConfiguracoes();
             const string esperado = "Servidor: smtp.gmail.com - Porta: 587";
 
@@ -19,63 +19,63 @@ namespace AvaliacaoDeCandidatosApi.Tests.ModelTests {
         }
 
         [Fact]
-        public void Equals_method_deve_indicar_que_os_objetos_sao_iguais() {
+        public void EqualsMethodTest_deve_indicar_que_os_objetos_sao_iguais() {
             CreateConfiguracoes();
 
             Assert.True(_configuracao1.Equals(_configuracao2));
         }
 
         [Fact]
-        public void Equals_method_deve_indicar_que_os_objetos_sao_diferentes() {
+        public void EqualsMethodTest_deve_indicar_que_os_objetos_sao_diferentes() {
             CreateConfiguracoes();
 
             Assert.False(_configuracao1.Equals(_configuracao3));
         }
 
         [Fact]
-        public void Object_Equals_method_deve_indicar_que_os_objetos_sao_iguais() {
+        public void ObjectEqualsTest_deve_indicar_que_os_objetos_sao_iguais() {
             CreateConfiguracoes();
 
             Assert.True(Equals(_configuracao1, _configuracao2));
         }
 
         [Fact]
-        public void Object_Equals_method_deve_indicar_que_os_objetos_sao_diferentes() {
+        public void ObjectEqualsTest_deve_indicar_que_os_objetos_sao_diferentes() {
             CreateConfiguracoes();
 
             Assert.False(Equals(_configuracao1, _configuracao3));
         }
 
         [Fact]
-        public void Equals_operator_deve_indicar_que_os_objetos_sao_iguais() {
+        public void EqualsOperatorTest_deve_indicar_que_os_objetos_sao_iguais() {
             CreateConfiguracoes();
 
             Assert.True(_configuracao1 == _configuracao2);
         }
 
         [Fact]
-        public void Equals_operator_deve_indicar_que_os_objetos_sao_diferentes() {
+        public void EqualsOperatorTest_deve_indicar_que_os_objetos_sao_diferentes() {
             CreateConfiguracoes();
 
             Assert.False(_configuracao1 == _configuracao3);
         }
 
         [Fact]
-        public void NotEquals_operator_deve_indicar_que_os_objetos_nao_sao_diferentes() {
+        public void NotEqualsOperatorTest_deve_indicar_que_os_objetos_nao_sao_diferentes() {
             CreateConfiguracoes();
 
             Assert.False(_configuracao1 != _configuracao2);
         }
 
         [Fact]
-        public void NotEquals_operator_deve_indicar_que_os_objetos_sao_diferentes() {
+        public void NotEqualsOperatorTest_deve_indicar_que_os_objetos_sao_diferentes() {
             CreateConfiguracoes();
 
             Assert.True(_configuracao1 != _configuracao3);
         }
 
         [Fact]
-        public void GetHashCode_deve_retornar_o_valor_esperado() {
+        public void GetHashCodeTest_deve_retornar_o_valor_esperado() {
             CreateConfiguracoes();
             
             var esperado = GetHashCode(_configuracao1);

@@ -9,7 +9,7 @@ namespace AvaliacaoDeCandidatosApi.Tests.ModelTests {
         private Email _email3;
 
         [Fact]
-        public void ToString_de_retornar_o_valor_esperado() {
+        public void ToStringTest_de_retornar_o_valor_esperado() {
             CreateEmails();
             const string esperado = "Origem: origem@gmail.com - Destino: destino@gmail.com - Assunto: Aquele assunto";
 
@@ -19,63 +19,63 @@ namespace AvaliacaoDeCandidatosApi.Tests.ModelTests {
         }
 
         [Fact]
-        public void Equals_method_deve_indicar_que_os_objetos_sao_iguais() {
+        public void EqualsMethodTest_deve_indicar_que_os_objetos_sao_iguais() {
             CreateEmails();
 
             Assert.True(_email1.Equals(_email2));
         }
 
         [Fact]
-        public void Equals_method_deve_indicar_que_os_objetos_sao_diferentes() {
+        public void EqualsMethodTest_deve_indicar_que_os_objetos_sao_diferentes() {
             CreateEmails();
 
             Assert.False(_email1.Equals(_email3));
         }
 
         [Fact]
-        public void Object_Equals_method_deve_indicar_que_os_objetos_sao_iguais() {
+        public void ObjectEqualsTest_deve_indicar_que_os_objetos_sao_iguais() {
             CreateEmails();
 
             Assert.True(Equals(_email1, _email2));
         }
 
         [Fact]
-        public void Object_Equals_method_deve_indicar_que_os_objetos_sao_diferentes() {
+        public void ObjectEqualsTest_deve_indicar_que_os_objetos_sao_diferentes() {
             CreateEmails();
 
             Assert.False(Equals(_email1, _email3));
         }
 
         [Fact]
-        public void Equals_operator_deve_indicar_que_os_objetos_sao_iguais() {
+        public void EqualsOperatorTest_deve_indicar_que_os_objetos_sao_iguais() {
             CreateEmails();
 
             Assert.True(_email1 == _email2);
         }
 
         [Fact]
-        public void Equals_operator_deve_indicar_que_os_objetos_sao_diferentes() {
+        public void EqualsOperatorTest_deve_indicar_que_os_objetos_sao_diferentes() {
             CreateEmails();
 
             Assert.False(_email1 == _email3);
         }
 
         [Fact]
-        public void NotEquals_operator_deve_indicar_que_os_objetos_nao_sao_diferentes() {
+        public void NotEqualsOperatorTest_deve_indicar_que_os_objetos_nao_sao_diferentes() {
             CreateEmails();
 
             Assert.False(_email1 != _email2);
         }
 
         [Fact]
-        public void NotEquals_operator_deve_indicar_que_os_objetos_sao_diferentes() {
+        public void NotEqualsOperatorTest_deve_indicar_que_os_objetos_sao_diferentes() {
             CreateEmails();
 
             Assert.True(_email1 != _email3);
         }
 
         [Fact]
-        public void GetHashCode_deve_retornar_o_valor_esperado() {
+        public void GetHashCodeTest_deve_retornar_o_valor_esperado() {
             CreateEmails();
             
             var esperado = GetHashCode(_email1);

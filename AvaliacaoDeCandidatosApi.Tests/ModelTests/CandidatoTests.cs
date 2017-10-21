@@ -8,7 +8,7 @@ namespace AvaliacaoDeCandidatosApi.Tests.ModelTests {
         private Candidato _candidato3;
 
         [Fact]
-        public void ToString_de_retornar_o_valor_esperado() {
+        public void ToStringTest_de_retornar_o_valor_esperado() {
             CreateCandidatos();
             const string esperado = "Nome: CandidatoTeste1 - Email: candidato@teste1.com";
 
@@ -18,63 +18,63 @@ namespace AvaliacaoDeCandidatosApi.Tests.ModelTests {
         }
 
         [Fact]
-        public void Equals_method_deve_indicar_que_os_objetos_sao_iguais() {
+        public void EqualsMethodTest_deve_indicar_que_os_objetos_sao_iguais() {
             CreateCandidatos();
 
             Assert.True(_candidato1.Equals(_candidato2));
         }
 
         [Fact]
-        public void Equals_method_deve_indicar_que_os_objetos_sao_diferentes() {
+        public void EqualsMethodTest_deve_indicar_que_os_objetos_sao_diferentes() {
             CreateCandidatos();
 
             Assert.False(_candidato1.Equals(_candidato3));
         }
 
         [Fact]
-        public void Object_Equals_method_deve_indicar_que_os_objetos_sao_iguais() {
+        public void ObjectEqualsTest_deve_indicar_que_os_objetos_sao_iguais() {
             CreateCandidatos();
 
             Assert.True(Equals(_candidato1, _candidato2));
         }
 
         [Fact]
-        public void Object_Equals_method_deve_indicar_que_os_objetos_sao_diferentes() {
+        public void ObjectEqualsTest_deve_indicar_que_os_objetos_sao_diferentes() {
             CreateCandidatos();
 
             Assert.False(Equals(_candidato1, _candidato3));
         }
 
         [Fact]
-        public void Equals_operator_deve_indicar_que_os_objetos_sao_iguais() {
+        public void EqualsOperatorTest_deve_indicar_que_os_objetos_sao_iguais() {
             CreateCandidatos();
 
             Assert.True(_candidato1 == _candidato2);
         }
 
         [Fact]
-        public void Equals_operator_deve_indicar_que_os_objetos_sao_diferentes() {
+        public void EqualsOperatorTest_deve_indicar_que_os_objetos_sao_diferentes() {
             CreateCandidatos();
 
             Assert.False(_candidato1 == _candidato3);
         }
 
         [Fact]
-        public void NotEquals_operator_deve_indicar_que_os_objetos_nao_sao_diferentes() {
+        public void NotEqualsOperatorTest_deve_indicar_que_os_objetos_nao_sao_diferentes() {
             CreateCandidatos();
 
             Assert.False(_candidato1 != _candidato2);
         }
 
         [Fact]
-        public void NotEquals_operator_deve_indicar_que_os_objetos_sao_diferentes() {
+        public void NotEqualsOperatorTest_deve_indicar_que_os_objetos_sao_diferentes() {
             CreateCandidatos();
 
             Assert.True(_candidato1 != _candidato3);
         }
 
         [Fact]
-        public void GetHashCode_deve_retornar_o_valor_esperado() {
+        public void GetHashCodeTest_deve_retornar_o_valor_esperado() {
             CreateCandidatos();
             
             var esperado = GetHashCode(_candidato1);

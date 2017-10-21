@@ -7,16 +7,19 @@ using AvaliacaoDeCandidatosApi.Models;
 using AvaliacaoDeCandidatosApi.Services;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Configuration;
+using AvaliacaoDeCandidatosApi.Wrappers;
 
 namespace AvaliacaoDeCandidatosApi.Controllers {
     [Route("api/[controller]")]
     public class CandidatosController : Controller {
         private IConfiguracaoSmtp _configuracaoSmtp;
         private IServicoDeEnvioDeEmail _servicoDeEnvioDeEmail;
+        private ISmtpClient _smtpClient;
 
-        public CandidatosController(IOptions<ConfiguracaoSmtp> configuracaoSmtp, IServicoDeEnvioDeEmail servicoDeEnvioDeEmail){
+        public CandidatosController(IOptions<ConfiguracaoSmtp> configuracaoSmtp, IServicoDeEnvioDeEmail servicoDeEnvioDeEmail, ISmtpClient smtpClient){
             _configuracaoSmtp = configuracaoSmtp.Value;
             _servicoDeEnvioDeEmail = servicoDeEnvioDeEmail;
+            _smtpClient = smtpClient;
         }
 
         // GET api/candidatos
@@ -30,7 +33,7 @@ namespace AvaliacaoDeCandidatosApi.Controllers {
                 MensagemHtml = string.Empty,
                 EncaminharPara = string.Empty
             };
-            _servicoDeEnvioDeEmail.EnvieEmailAsync(_configuracaoSmtp, email);
+            _servicoDeEnvioDeEmail.EnvieEmailAsync(_configuracaoSmtp, email, _smtpClient);
             return new [] { _configuracaoSmtp };
         }
 
