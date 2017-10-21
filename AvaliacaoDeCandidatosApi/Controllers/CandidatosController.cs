@@ -26,53 +26,101 @@ namespace AvaliacaoDeCandidatosApi.Controllers {
             _servicoDeQualificacaoDeCandidatos = servicoDeQualificacaoDeCandidatos;
         }
 
-        // GET api/candidatos
         [HttpGet]
-        public IEnumerable<dynamic> Get() {
-            var email = new Email{
-                Destino = "xitaocrazy@gmail.com",
-                Origem = "danieldesouzamartins@gmail.com",
-                Assunto = "teste de envio",
-                MensagemDeTexto = "Isto é um teste",
-                MensagemHtml = string.Empty,
-                EncaminharPara = string.Empty
+        public IEnumerable<Candidato> Get() {
+            var candidatos = CrieListaDeCandidatos();
+            return candidatos;
+        }
+
+        [HttpGet("{email}")]
+        public Candidato Get(string email) {
+            var candidatos = CrieListaDeCandidatos();
+            return candidatos.FirstOrDefault(c => c.Email == email);
+        }
+
+        [HttpPost]
+        public string Post([FromBody]Candidato candidato) {
+            return "Seu cadastro foi realizado com sucesso. Iremos avaliar as informações e lhe retornaremos por e-mail.";
+        }
+
+        [HttpPut("{email}")]
+        public string Put(string email, [FromBody]Candidato candidato) {
+            return "Seu cadastro foi atualizado com sucesso. Iremos avaliar as informações e lhe retornaremos por e-mail.";
+        }
+
+        [HttpDelete("{email}")]
+        public string Delete(string email) {
+            return "Seu cadastro foi deletado com sucesso.";
+        }
+
+
+        private List<Candidato> CrieListaDeCandidatos(){
+            var candidato1 = new Candidato{
+                Nome = "CandidatoFrontEnd",
+                Email = "candidato@frontend.com",
+                HTML = 9,
+                CSS = 8,
+                Javascript = 9,
+                Python = 5,
+                Django = 5,
+                Ios = 2,
+                Android = 2               
             };
-            var candidato = new Candidato{
-                Nome = "CandidatoTeste1",
-                Email = "candidato@teste1.com",
-                HTML = 8,
+            var candidato2 = new Candidato{
+                Nome = "CandidatoBackEnd",
+                Email = "candidato@backend.com",
+                HTML = 5,
+                CSS = 3,
+                Javascript = 7,
+                Python = 8,
+                Django = 8,
+                Ios = 0,
+                Android = 0                
+            };
+            var candidato3 = new Candidato{
+                Nome = "CandidatoMobile",
+                Email = "candidato@mobile.com",
+                HTML = 3,
                 CSS = 8,
                 Javascript = 8,
                 Python = 8,
-                Django = 8,
-                Ios = 2,
+                Django = 4,
+                Ios = 8,
                 Android = 8                
             };
-            //_servicoDeEnvioDeEmail.EnvieEmailAsync(_configuracaoSmtp, email, _smtpClient);
-            _servicoDeQualificacaoDeCandidatos.QualifiqueCandidato(candidato);
-            var retorno = _servicoDeQualificacaoDeCandidatos.GetEmailDeRetorno(candidato, "origem@gail.com");
-            return retorno;
-        }
-
-        // GET api/candidatos/5
-        [HttpGet("{id}")]
-        public string Get(int id) {
-            return "value";
-        }
-
-        // POST api/candidatos
-        [HttpPost]
-        public void Post([FromBody]string value) {
-        }
-
-        // PUT api/candidatos/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value) {
-        }
-
-        // DELETE api/candidatos/5
-        [HttpDelete("{id}")]
-        public void Delete(int id) {
+            var candidato4 = new Candidato{
+                Nome = "CandidatoFullStack",
+                Email = "candidato@fullstack.com",
+                HTML = 9,
+                CSS = 9,
+                Javascript = 9,
+                Python = 9,
+                Django = 9,
+                Ios = 7,
+                Android = 0                
+            };
+            var candidato5 = new Candidato{
+                Nome = "Candidato",
+                Email = "candidato@nenhum.com",
+                HTML = 5,
+                CSS = 3,
+                Javascript = 7,
+                Python = 5,
+                Django = 5,
+                Ios = 0,
+                Android = 0                
+            };
+            var candidatos = new List<Candidato>{
+                candidato1,
+                candidato2,
+                candidato3,
+                candidato4,
+                candidato5
+            };
+            foreach(var candidato in candidatos){
+                _servicoDeQualificacaoDeCandidatos.QualifiqueCandidato(candidato);
+            }
+            return candidatos;
         }
     }
 }
