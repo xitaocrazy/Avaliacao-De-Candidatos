@@ -12,8 +12,8 @@ namespace AvaliacaoDeCandidatosApi.Controllers {
     public class CandidatosController : Controller {
         private IConfiguracaoSmtp _configuracaoSmtp;
 
-        public CandidatosController(IConfiguracaoSmtp configuracaoSmtp){
-            _configuracaoSmtp = configuracaoSmtp;
+        public CandidatosController(IOptions<ConfiguracaoSmtp> configuracaoSmtp){
+            _configuracaoSmtp = configuracaoSmtp.Value;
         }
 
         // GET api/candidatos

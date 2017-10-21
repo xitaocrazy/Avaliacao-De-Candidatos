@@ -19,9 +19,8 @@ namespace AvaliacaoDeCandidatosApi {
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services) {
-            services.AddTransient<IConfiguracaoSmtp, ConfiguracaoSmtp>();
             services.AddSingleton<IConfiguration>(c => Configuration);
-            //services.Configure<ConfiguracaoSmtp>(Configuration.GetSection("ConfiguracaoSmtp"));
+            services.Configure<ConfiguracaoSmtp>(Configuration.GetSection("ConfiguracaoSmtp"));
             services.AddMvc();
         }
 

@@ -17,7 +17,7 @@ namespace AvaliacaoDeCandidatosApi.Models {
 
 
         public override string ToString() {
-            return $"Registros Nome: {Nome} - Email: {Email}";
+            return $"Nome: {Nome} - Email: {Email}";
         }
 
         public bool Equals(Candidato other) {

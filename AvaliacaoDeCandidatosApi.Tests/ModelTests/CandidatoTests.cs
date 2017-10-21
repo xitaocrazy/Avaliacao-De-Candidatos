@@ -10,7 +10,7 @@ namespace AvaliacaoDeCandidatosApi.Tests.ModelTests {
         [Fact]
         public void ToString_de_retornar_o_valor_esperado() {
             CreateCandidatos();
-            const string esperado = "Registros Nome: CandidatoTeste1 - Email: candidato@teste1.com";
+            const string esperado = "Nome: CandidatoTeste1 - Email: candidato@teste1.com";
 
             var retornado = _candidato1.ToString();
 
