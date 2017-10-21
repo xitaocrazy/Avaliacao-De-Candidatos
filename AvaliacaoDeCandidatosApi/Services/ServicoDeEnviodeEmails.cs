@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AvaliacaoDeCandidatosApi.Exceptions;
 using AvaliacaoDeCandidatosApi.Models;
@@ -10,83 +11,109 @@ using MimeKit;
 namespace AvaliacaoDeCandidatosApi.Services {
     public class ServicoDeEnvioDeEmail : IServicoDeEnvioDeEmail {
         private IConfiguracaoSmtp _configuracaoSmtp;
-        private IEmail _email;
-        private MimeMessage _mail; 
         private ISmtpClient _smtpClient;
 
         public async Task EnvieEmailAsync(IConfiguracaoSmtp configuracaoSmtp, IEmail email, ISmtpClient smtpClient){
             _configuracaoSmtp = configuracaoSmtp;
-            _email = email;
             _smtpClient = smtpClient;
 
-            SetParametrosDoemail();
-            ConstruaCorpoDoEmail();
-            await EnvieEmailAsync();
+            var mail = new MimeMessage();
+            SetParametrosDoemail(ref mail, email);
+            ConstruaCorpoDoEmail(ref mail, email);
+            await EnvieEmailAsync(mail);
         }
 
-        private void SetParametrosDoemail(){
-            VerifiqueSeOsParametrosObrigatoriosForamInformados();
-            
-            _mail = new MimeMessage();          
-            _mail.From.Add(new MailboxAddress(string.Empty, _email.Origem));
-            _mail.To.Add(new MailboxAddress(string.Empty, _email.Destino));
-            if(!string.IsNullOrWhiteSpace(_email.EncaminharPara)) {
-                _mail.ReplyTo.Add(new MailboxAddress(string.Empty, _email.EncaminharPara));
+        public async Task EnvieEmailsAsync(IConfiguracaoSmtp configuracaoSmtp, IList<IEmail> emails, ISmtpClient smtpClient){
+            _configuracaoSmtp = configuracaoSmtp;
+            _smtpClient = smtpClient;
+            var mails = new List<MimeMessage>();
+            foreach(var email in emails){
+                var mail = new MimeMessage();
+                SetParametrosDoemail(ref mail, email);
+                ConstruaCorpoDoEmail(ref mail, email);
+                mails.Add(mail);
             }
-            _mail.Subject = _email.Assunto;
+            await EnvieEmailsAsync(mails);
         }
 
-        private void VerifiqueSeOsParametrosObrigatoriosForamInformados() {
-            if (string.IsNullOrWhiteSpace(_email.Destino)) {
+        private void SetParametrosDoemail(ref MimeMessage mail, IEmail email){
+            VerifiqueSeOsParametrosObrigatoriosForamInformados(email);
+            
+            mail.From.Add(new MailboxAddress(string.Empty, email.Origem));
+            mail.To.Add(new MailboxAddress(string.Empty, email.Destino));
+            if(!string.IsNullOrWhiteSpace(email.EncaminharPara)) {
+                mail.ReplyTo.Add(new MailboxAddress(string.Empty, email.EncaminharPara));
+            }
+            mail.Subject = email.Assunto;
+        }
+
+        private void VerifiqueSeOsParametrosObrigatoriosForamInformados(IEmail email) {
+            if (string.IsNullOrWhiteSpace(email.Destino)) {
                 throw new ArgumentException("E-mail de destino não informado.");
             }
 
-            if (string.IsNullOrWhiteSpace(_email.Origem)) {
+            if (string.IsNullOrWhiteSpace(email.Origem)) {
                 throw new ArgumentException("E-mail de origem não informado.");
             }
 
-            if (string.IsNullOrWhiteSpace(_email.Assunto)) {
+            if (string.IsNullOrWhiteSpace(email.Assunto)) {
                 throw new ArgumentException("Assunto não informado.");
             }
         }
 
-        private void ConstruaCorpoDoEmail(){
-            VerifiqueSeOConteudoFoiInformado();
+        private void ConstruaCorpoDoEmail(ref MimeMessage mail, IEmail email){
+            VerifiqueSeOConteudoFoiInformado(email);
             var bodyBuilder = new BodyBuilder();
-            if(TemTexto()) {
-                bodyBuilder.TextBody = _email.MensagemDeTexto;
+            if(TemTexto(email)) {
+                bodyBuilder.TextBody = email.MensagemDeTexto;
             }
-            if (TemHtml()) {
-                bodyBuilder.HtmlBody = _email.MensagemHtml;
+            if (TemHtml(email)) {
+                bodyBuilder.HtmlBody = email.MensagemHtml;
             }
-            _mail.Body = bodyBuilder.ToMessageBody();
+            mail.Body = bodyBuilder.ToMessageBody();
         }
 
-        private bool TemTexto(){
-            return !string.IsNullOrWhiteSpace(_email.MensagemDeTexto);
+        private bool TemTexto(IEmail email){
+            return !string.IsNullOrWhiteSpace(email.MensagemDeTexto);
         }
 
-        private bool TemHtml(){
-            return !string.IsNullOrWhiteSpace(_email.MensagemHtml);
+        private bool TemHtml(IEmail email){
+            return !string.IsNullOrWhiteSpace(email.MensagemHtml);
         }
 
-        private void VerifiqueSeOConteudoFoiInformado(){
-            if (!TemTexto() && !TemHtml()) {
+        private void VerifiqueSeOConteudoFoiInformado(IEmail email){
+            if (!TemTexto(email) && !TemHtml(email)) {
                 throw new ArgumentException("Nenhuma mensagem foi informada.");
             }
         }
 
-        private async Task EnvieEmailAsync(){
+        private async Task EnvieEmailAsync(MimeMessage mail){
             try{
                 await _smtpClient.ConnectAsync(_configuracaoSmtp.Servidor, _configuracaoSmtp.Porta, _configuracaoSmtp.UseSsl).ConfigureAwait(false);
                 if(_configuracaoSmtp.RequerAutenticacao) {
                     await _smtpClient.AuthenticateAsync(_configuracaoSmtp.Usuario, _configuracaoSmtp.Senha).ConfigureAwait(false);
                 }               
-                await _smtpClient.SendAsync(_mail).ConfigureAwait(false);
+                await _smtpClient.SendAsync(mail).ConfigureAwait(false);
                 await _smtpClient.DisconnectAsync(true).ConfigureAwait(false);
             }
             catch (Exception ex){
                 throw new EnvioDeEmailException("Erro ao enviar o e-mail.", ex.InnerException);
+            }
+        }
+
+        private async Task EnvieEmailsAsync(List<MimeMessage> mails){
+            try{
+                await _smtpClient.ConnectAsync(_configuracaoSmtp.Servidor, _configuracaoSmtp.Porta, _configuracaoSmtp.UseSsl).ConfigureAwait(false);
+                if(_configuracaoSmtp.RequerAutenticacao) {
+                    await _smtpClient.AuthenticateAsync(_configuracaoSmtp.Usuario, _configuracaoSmtp.Senha).ConfigureAwait(false);
+                } 
+                foreach(var mail in mails){              
+                    await _smtpClient.SendAsync(mail).ConfigureAwait(false);
+                }
+                await _smtpClient.DisconnectAsync(true).ConfigureAwait(false);
+            }
+            catch (Exception ex){
+                throw new EnvioDeEmailException("Erro ao enviar os e-mails.", ex.InnerException);
             }
         }
     }

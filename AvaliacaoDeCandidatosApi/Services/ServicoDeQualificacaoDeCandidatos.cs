@@ -8,8 +8,8 @@ namespace AvaliacaoDeCandidatosApi.Services {
             VerifiqueSeCandidatoPossuiAlgumaQualificacao(candidato);
         }
 
-        public List<Email> GetEmailDeRetorno(ICandidato candidato, string origem){
-            var emails = new List<Email>();
+        public IList<IEmail> GetEmailDeRetorno(ICandidato candidato, string origem){
+            var emails = new List<IEmail>();
             foreach(var qualificacao in candidato.Qualificacoes){
                 switch(qualificacao){
                     case Qualificacao.backEnd:

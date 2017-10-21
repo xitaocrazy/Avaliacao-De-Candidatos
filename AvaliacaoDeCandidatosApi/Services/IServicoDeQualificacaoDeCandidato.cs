@@ -5,6 +5,6 @@ namespace AvaliacaoDeCandidatosApi.Services {
     public interface IServicoDeQualificacaoDeCandidatos {
         void QualifiqueCandidato(ICandidato candidato);
 
-        List<Email> GetEmailDeRetorno(ICandidato candidato, string origem);
+        IList<IEmail> GetEmailDeRetorno(ICandidato candidato, string origem);
     }
 }

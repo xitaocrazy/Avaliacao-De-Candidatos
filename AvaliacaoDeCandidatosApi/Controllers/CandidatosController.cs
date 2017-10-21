@@ -15,15 +15,19 @@ namespace AvaliacaoDeCandidatosApi.Controllers {
         private IConfiguracaoSmtp _configuracaoSmtp;
         private IServicoDeEnvioDeEmail _servicoDeEnvioDeEmail;
         private ISmtpClient _smtpClient;
-
         private IServicoDeQualificacaoDeCandidatos _servicoDeQualificacaoDeCandidatos;
+        private string _emailOrigem;
 
-        public CandidatosController(IOptions<ConfiguracaoSmtp> configuracaoSmtp, IServicoDeEnvioDeEmail servicoDeEnvioDeEmail, 
-                                    ISmtpClient smtpClient, IServicoDeQualificacaoDeCandidatos servicoDeQualificacaoDeCandidatos){
+        public CandidatosController(IOptions<ConfiguracaoSmtp> configuracaoSmtp, 
+                                    IServicoDeEnvioDeEmail servicoDeEnvioDeEmail, 
+                                    ISmtpClient smtpClient, 
+                                    IServicoDeQualificacaoDeCandidatos servicoDeQualificacaoDeCandidatos, 
+                                    IConfiguration configuracao){
             _configuracaoSmtp = configuracaoSmtp.Value;
             _servicoDeEnvioDeEmail = servicoDeEnvioDeEmail;
             _smtpClient = smtpClient;
             _servicoDeQualificacaoDeCandidatos = servicoDeQualificacaoDeCandidatos;
+            _emailOrigem = configuracao["EmailOrigem"];
         }
 
         [HttpGet]
@@ -40,6 +44,10 @@ namespace AvaliacaoDeCandidatosApi.Controllers {
 
         [HttpPost]
         public string Post([FromBody]Candidato candidato) {
+            _servicoDeQualificacaoDeCandidatos.QualifiqueCandidato(candidato);
+            var emailsDeRetorno = _servicoDeQualificacaoDeCandidatos.GetEmailDeRetorno(candidato, _emailOrigem);
+            _servicoDeEnvioDeEmail.EnvieEmailsAsync(_configuracaoSmtp, emailsDeRetorno, _smtpClient);
+
             return "Seu cadastro foi realizado com sucesso. Iremos avaliar as informações e lhe retornaremos por e-mail.";
         }
 
