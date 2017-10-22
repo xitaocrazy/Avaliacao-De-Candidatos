@@ -26,6 +26,16 @@ namespace AvaliacaoDeCandidatosApi {
             services.AddTransient<ISmtpClient, SmtpClientWrapper>();
             services.AddSingleton<IConfiguration>(c => Configuration);
             services.Configure<ConfiguracaoSmtp>(Configuration.GetSection("ConfiguracaoSmtp"));
+
+            services.AddCors(options => {
+                options.AddPolicy("AllowAllOrigins",
+                    builder => {
+                        builder.AllowAnyOrigin();
+                        builder.AllowAnyHeader();
+                        builder.AllowAnyMethod();
+                    });
+            });
+
             services.AddMvc();
         }
 
@@ -34,6 +44,7 @@ namespace AvaliacaoDeCandidatosApi {
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors("AllowAllOrigins");
             app.UseMvc();
         }
     }
