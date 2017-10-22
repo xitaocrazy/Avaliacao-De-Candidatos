@@ -32,10 +32,15 @@ namespace AvaliacaoDeCandidatosApi.Controllers {
 
         [HttpPost]
         public string Post([FromBody]Candidato candidato) {
-            _servicoDeQualificacaoDeCandidatos.QualifiqueCandidato(candidato);
-            var emailsDeRetorno = _servicoDeQualificacaoDeCandidatos.GetEmailDeRetorno(candidato, _emailOrigem);
-            _servicoDeEnvioDeEmail.EnvieEmailsAsync(_configuracaoSmtp, emailsDeRetorno, _smtpClient);
-            return "Seu cadastro foi realizado com sucesso. Iremos avaliar as informações e lhe retornaremos por e-mail.";
+            try{
+                _servicoDeQualificacaoDeCandidatos.QualifiqueCandidato(candidato);
+                var emailsDeRetorno = _servicoDeQualificacaoDeCandidatos.GetEmailDeRetorno(candidato, _emailOrigem);
+                _servicoDeEnvioDeEmail.EnvieEmailsAsync(_configuracaoSmtp, emailsDeRetorno, _smtpClient);
+                return "Seu cadastro foi realizado com sucesso. Iremos avaliar as informações e lhe retornaremos por e-mail.";
+            }
+            catch(Exception ex){
+                throw new Exception("Erro ao processar os dados do candidato.", ex.InnerException);
+            }
         }
     }
 }
