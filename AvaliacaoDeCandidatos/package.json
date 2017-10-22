@@ -1,0 +1,13 @@
+{
+  "name": "avaliacao-de-candidato",
+  "version": "0.0.1",
+  "description": "Definição das dependências do proetoj",
+  "scripts": {},
+  "author": "daniel de Souza Martins",
+  "license": "",
+  "devDependencies": {
+    "@types/jquery": "^3.2.15",
+    "@types/knockout": "^3.4.46",
+    "@types/requirejs": "^2.1.31"
+  }
+}
