@@ -2,9 +2,6 @@
     --color-body-bg: #000000;
     --color-text: #ffffff;
     --color-text-highlighted: #35e6da;
-    --color-btn-bg: #2e8836;
-    --color-btn-text: #ffffff;
-    --color-btn-hover: #28521b;
 }
 
 html{
@@ -37,15 +34,6 @@ main {
 
 section {
     margin-bottom: 5vh;
-}
-
-.btn {
-    background-color: var(--color-btn-bg);
-    color: var(--color-btn-text);
-}
-
-.btn:hover {
-    background-color: var(--color-btn-hover);
 }
 
 .brand-header {

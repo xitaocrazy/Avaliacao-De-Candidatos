@@ -11,20 +11,24 @@ class IndexViewModel {
     notaIos: KnockoutObservable<number>;
     notaAndroid: KnockoutObservable<number>;
     passo: KnockoutObservable<number>;
+    resultado: KnockoutObservable<string>;
+    tentativasDeCadastro: KnockoutObservable<number>;
 
     constructor() {
         this.nome = ko.observable(''); 
         this.email = ko.observable('');
         this.temErroNoNome = ko.observable(false); 
         this.temErroNoEmail = ko.observable(false);
-        this.notaHtml = ko.observable(5);
-        this.notaCss = ko.observable(5);
-        this.notaJs = ko.observable(5);
-        this.notaPython = ko.observable(5);
-        this.notaDjango = ko.observable(5);
-        this.notaIos = ko.observable(5);
-        this.notaAndroid = ko.observable(5);
+        this.notaHtml = ko.observable(0);
+        this.notaCss = ko.observable(0);
+        this.notaJs = ko.observable(0);
+        this.notaPython = ko.observable(0);
+        this.notaDjango = ko.observable(0);
+        this.notaIos = ko.observable(0);
+        this.notaAndroid = ko.observable(0);
         this.passo = ko.observable(1);
+        this.resultado = ko.observable('');
+        this.tentativasDeCadastro = ko.observable(0);
     }
 
     ehNomeValido(){
@@ -41,6 +45,11 @@ class IndexViewModel {
         if(!er.exec(this.email())){
             this.temErroNoEmail(true);
         }
+    }
+
+    atualizeTentativas(){
+        var tentativas = this.tentativasDeCadastro() + 1;
+        this.tentativasDeCadastro(tentativas);
     }
 
     public andarPasso(){
@@ -87,11 +96,16 @@ class IndexViewModel {
             contentType: "application/json"
         })
         .done((result) => {
-            alert(result);
+            this.resultado(result);
             this.andarPasso();
         })
         .fail(() => {
             alert('Ops. Algo errado não está certo. Tente novamente');
+            this.atualizeTentativas();
+            if (this.tentativasDeCadastro() >= 3){
+                this.resultado("Infelizmente não foi possível efetuar o cadastro. Por favor, tente novamente mais tarde.");
+                this.andarPasso();
+            }
         });
     }
 }

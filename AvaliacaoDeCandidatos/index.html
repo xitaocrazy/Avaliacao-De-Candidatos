@@ -72,7 +72,7 @@
             </div>            
         </div>        
         <div class="container">
-            <button class="btn btn-lg" data-bind="click:iniciarCadastro">INICIAR<br />CADASTRO</button>
+            <button class="btn btn-lg btn-success" data-bind="click:iniciarCadastro">INICIAR<br />CADASTRO</button>
         </div> 
     </section> 
     <!-- Auto avaliação-->
@@ -128,10 +128,25 @@
                 </div>
             </div>
             <div class="row text">
-                <button class="btn btn-lg" data-bind="click:finalizarCadastro">FINALIZAR<br />CADASTRO</button>
+                <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <button class="btn btn-lg btn-primary" data-bind="click:voltarPasso">Redefinir<br />Dados pessoais</button>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <button class="btn btn-lg btn-success" data-bind="click:finalizarCadastro">FINALIZAR<br />CADASTRO</button>
+                    </div>                    
+                </div>                
             </div>
         </div>
-    </section>           
+    </section>     
+    <!-- Auto avaliação-->
+    <section id="resultado" data-bind="visible: passo() === 3">
+        <div class="container">
+            <div class="row text">                
+                <h2><span class="text-highlighted" data-bind="text: resultado"></span></h2>
+            </div>
+        </div>
+    </section>      
 </main>
 
 <footer>
