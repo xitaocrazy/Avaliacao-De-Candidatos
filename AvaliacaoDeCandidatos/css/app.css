@@ -1,0 +1,95 @@
+:root {
+    --color-body-bg: #000000;
+    --color-text: #ffffff;
+    --color-text-highlighted: #35e6da;
+    --color-btn-bg: #2e8836;
+    --color-btn-text: #ffffff;
+    --color-btn-hover: #28521b;
+}
+
+html{
+    height: 100%;
+}
+
+body{
+    height: 100%;
+    background-color: var(--color-body-bg);
+    color: var(--color-text);
+    font-family: 'Exo 2', sans-serif;
+}
+
+header {
+    text-align: center;
+    font-weight: 600;
+    text-shadow: 2px 2px 12px #635a5a;
+    background-color: #8bd0f8;
+    min-height: 30vh;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+}
+
+main {
+    text-align: center;
+    min-height: 80vh;
+    height: auto !important;
+    height: 100vh;
+}
+
+section {
+    margin-bottom: 5vh;
+}
+
+.btn {
+    background-color: var(--color-btn-bg);
+    color: var(--color-btn-text);
+}
+
+.btn:hover {
+    background-color: var(--color-btn-hover);
+}
+
+.brand-header {
+    display: inline-block;
+    height: 120px;
+    margin-bottom: 5vh;
+}
+
+.text{
+    padding-top: 40px;
+    padding-bottom: 20px;
+}
+
+.text p{    
+    font-size: 35px;
+    color: #FFFFFF;
+}
+
+.text p b{
+    font-size: 30px;
+    color: var(--color-text-highlighted);
+}
+
+span.text-highlighted {
+    color: var(--color-text-highlighted);
+}
+
+.nome-email {
+    text-align: left !important;
+    padding: 10px;
+}
+
+.nome-email input{
+    border-radius: 4px;
+}
+
+input[type="text"], input[type="email"] {
+    font-family: 'Lato', sans-serif;
+}
+
+footer {
+    background-color: #E4E0E0;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    color: #000000;
+    text-align: center;
+}

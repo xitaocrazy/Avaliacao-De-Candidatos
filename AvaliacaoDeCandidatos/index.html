@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Minha Vaga</title>
+
+    <link rel="icon" type="image/png" href="img/favicon_16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="img/favicon_32x32.png" sizes="32x32" />
+
+    <meta name="description" content="Avalie suas qualidades como desenvolvedor" />
+
+    <meta property="og:url" content="index.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Minha Vaga" />
+    <meta property="og:description" content="Avalie suas qualidades como desenvolvedor" />
+    <meta property="og:image" content="img/marca_header.png" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:url" content="index.html">
+    <meta name="twitter:title" content="Minha Vaga">
+    <meta name="twitter:description" content="Avalie suas qualidades como desenvolvedor">
+    <meta name="twitter:image" content="img/marca_header.png">
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.css">
+    <link rel="stylesheet" href="css/app.css">
+
+    <!-- Fonts inclusion -->
+    <link href="https://fonts.googleapis.com/css?family=Exo+2:400,400i,600,600i|Lato:400,400i" rel="stylesheet">
+
+	<script src="js/jquery.1.12.4.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/knockout-3.4.2.js"></script> 
+</head>
+<body>
+<header>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+                <img class="brand-header" src="img/marca_header_grande.png">
+                <h1><span class="text-highlighted">Avalie</span> seus <span class="text-highlighted">conhecimentos</span></h1>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <!-- Landing Page -->
+    <section id="section-landing-page">
+        <div class="container" id="section-dados-pessoais">        
+            <div class="row text">
+                <h2>Vamos lá? Comece agora o <span class="text-highlighted">cadastro</span> do seu <span class="text-highlighted">perfil!</span></h2>
+            </div>
+            <div class="row nome-email">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
+                    <div class="form-group">
+                        <label for="nome">Nome completo</label>
+                        <input type="text" id="nome" class="form-control" required pattern="^([a-zA-ZáéíóúàâêôãõüçÁÉÍÓÚÀÂÊÔÃÕÜÇ ]|\n){2,50} ([a-zA-ZáéíóúàâêôãõüçÁÉÍÓÚÀÂÊÔÃÕÜÇ ]|\n){2,50}$" placeholder="Nome Completo">
+                        <span id="helpBlock" class="help-block">Informe um nome válido. Ex: Nome Sobrenome</span>                 
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control" required pattern="^[A-Za-z0-9](([_.-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([.-]?[a-zA-Z0-9]+)*)([.][A-Za-z]{2,4})$" placeholder="exemplo@email.com">
+                        <span id="helpBlock" class="help-block">Informe um e-mail válido. Ex: exemplo@email.com</span>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <button class="btn btn-lg" >INICIAR<br />CADASTRO</button>
+        </div> 
+    </section>           
+</main>
+
+<footer>
+    <div class="container">
+        <h4>Minha Vaga</h4>
+        <p>Todos os direitos reservados. Outubro, 2017.</p>
+    </div>
+</footer>
+
+</body>
+
+<script type="text/javascript">
+    
+</script>
+</html>
