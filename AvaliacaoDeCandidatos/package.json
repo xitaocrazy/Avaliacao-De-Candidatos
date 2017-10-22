@@ -6,6 +6,7 @@
   "author": "daniel de Souza Martins",
   "license": "",
   "devDependencies": {
+    "@types/jasmine": "^2.6.0",
     "@types/jquery": "^3.2.15",
     "@types/knockout": "^3.4.46",
     "@types/requirejs": "^2.1.31",

@@ -90,4 +90,4 @@ var IndexViewModel = /** @class */ (function () {
     };
     return IndexViewModel;
 }());
-//# sourceMappingURL=index.js.map
+//# sourceMappingURL=indexViewModel.js.map
