@@ -15,9 +15,11 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      {pattern: 'js/**/*.js', included: false},
-      {pattern: 'ts/**/*.js', included: false},
-      {pattern: 'specs/**/*Spec.js', included: false}
+      'js/jquery.1.12.4.min.js',
+      'js/knockout-3.4.2.debug.js',
+      {pattern: 'js/*.js', included: true},      
+      {pattern: 'js/main.js', included: true},
+      {pattern: 'ts/built/**/*.js', included: true}
     ],
 
 

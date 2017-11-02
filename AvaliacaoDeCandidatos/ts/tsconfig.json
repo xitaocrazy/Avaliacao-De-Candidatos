@@ -1,12 +1,13 @@
 {
     "compilerOptions": {
-        "outDir": "../built/",
+        "outDir": "./built/",
         "sourceMap": true,
         "noImplicitAny": true,
-        "module": "amd",
+        "module": "commonjs",
         "target": "es5"
     },
     "files": [
-        "indexViewModelSpec.ts"
+        "./src/indexViewModel.ts",
+        "./specs/indexViewModelSpec.ts"
     ]
 }
