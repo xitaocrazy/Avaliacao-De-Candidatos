@@ -12897,30 +12897,32 @@
   },
   "packageFolders": {
     "C:\\Users\\daniel.martins\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\daniel.martins\\Documents\\GitHub\\Avaliacao-De-Candidatos\\AvaliacaoDeCandidatosApi\\AvaliacaoDeCandidatosApi.csproj",
+      "projectUniqueName": "d:\\GitHub\\Avaliacao-De-Candidatos\\AvaliacaoDeCandidatosApi\\AvaliacaoDeCandidatosApi.csproj",
       "projectName": "AvaliacaoDeCandidatosApi",
-      "projectPath": "C:\\Users\\daniel.martins\\Documents\\GitHub\\Avaliacao-De-Candidatos\\AvaliacaoDeCandidatosApi\\AvaliacaoDeCandidatosApi.csproj",
+      "projectPath": "d:\\GitHub\\Avaliacao-De-Candidatos\\AvaliacaoDeCandidatosApi\\AvaliacaoDeCandidatosApi.csproj",
       "packagesPath": "C:\\Users\\daniel.martins\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\daniel.martins\\Documents\\GitHub\\Avaliacao-De-Candidatos\\AvaliacaoDeCandidatosApi\\obj\\",
+      "outputPath": "d:\\GitHub\\Avaliacao-De-Candidatos\\AvaliacaoDeCandidatosApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
         "C:\\Users\\daniel.martins\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "http://way2buildcontinuo.brazilsouth.cloudapp.azure.com/httpAuth/app/nuget/v1/FeedService.svc/": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -12937,18 +12939,18 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
-          "Microsoft.NETCore.App": {
+          "MailKit": {
             "target": "Package",
-            "version": "2.0.0",
-            "autoReferenced": true
+            "version": "[1.18.1.1, )"
           },
           "Microsoft.AspNetCore.All": {
             "target": "Package",
-            "version": "2.0.0"
+            "version": "[2.0.0, )"
           },
-          "MailKit": {
+          "Microsoft.NETCore.App": {
             "target": "Package",
-            "version": "1.18.1.1"
+            "version": "[2.0.0, )",
+            "autoReferenced": true
           }
         },
         "imports": [
